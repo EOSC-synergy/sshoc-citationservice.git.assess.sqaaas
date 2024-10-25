@@ -1,0 +1,52 @@
+config:
+  credentials: []
+  project_repos:
+    gitea-s2i2s.isti.cnr.it/concordia/sshoc-citationservice:
+      branch: master
+      repo: https://gitea-s2i2s.isti.cnr.it/concordia/sshoc-citationservice.git
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      gitea-s2i2s.isti.cnr.it/concordia/sshoc-citationservice git:
+        commands:
+        - /usr/bin/env sh .sqa/script.snazzy-cardinal-lobster.sh
+        container: qc.acc_foggy-vermilion-quokka
+  QC.Doc:
+    repos:
+      gitea-s2i2s.isti.cnr.it/concordia/sshoc-citationservice find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-khaki-forest.sh
+        container: qc.doc_pretty-amaranth-chipmunk
+      gitea-s2i2s.isti.cnr.it/concordia/sshoc-citationservice git:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleepy-green-kakapo.sh
+        container: qc.doc_woozy-black-paradise
+      gitea-s2i2s.isti.cnr.it/concordia/sshoc-citationservice markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.fuzzy-malachite-rabbit.sh
+        container: qc.doc_cheeky-crimson-rhinoceros
+  QC.Lic:
+    repos:
+      gitea-s2i2s.isti.cnr.it/concordia/sshoc-citationservice licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.dorky-xanthic-starfish.sh
+        container: qc.lic_jumpy-chestnut-russel
+  QC.Sty:
+    repos:
+      gitea-s2i2s.isti.cnr.it/concordia/sshoc-citationservice checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.hasty-burgundy-wildebeest.sh
+        container: qc.sty_fuzzy-red-chicken
+  QC.Ver:
+    repos:
+      gitea-s2i2s.isti.cnr.it/concordia/sshoc-citationservice get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.lumpy-goldenrod-corgi.sh
+        container: qc.ver_randy-saffron-woodlouse
+timeout: 5400
